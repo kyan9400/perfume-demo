@@ -92,6 +92,10 @@
   .bottle-wrap { position: relative; display: grid; place-items: center; }
   .bottle { width: min(360px, 78vw); filter: drop-shadow(0 40px 60px rgba(0, 0, 0, .6)); animation: float 7s ease-in-out infinite; }
   @keyframes float { 0%, 100% { transform: translateY(0) rotate(-2deg); } 50% { transform: translateY(-16px) rotate(2deg); } }
+  .bottle-wrap { min-height: min(620px, 74vh); }
+  #bottle3d { position: absolute; inset: -6% -14%; width: 128%; height: 112%; display: block;
+    -webkit-mask-image: radial-gradient(closest-side, #000 72%, transparent); mask-image: radial-gradient(closest-side, #000 72%, transparent); }
+  .webgl .bottle, .webgl .halo { display: none; }
   .halo { position: absolute; width: 70%; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle, rgba(232, 196, 120, .28), transparent 65%); filter: blur(20px); animation: pulse 5s ease-in-out infinite; }
   @keyframes pulse { 0%, 100% { opacity: .7; transform: scale(1); } 50% { opacity: 1; transform: scale(1.08); } }
   .liquid { animation: slosh 6s ease-in-out infinite; transform-origin: center; }
@@ -174,6 +178,8 @@
     .hero .wrap, .visit { grid-template-columns: 1fr; }
     .bottle-wrap { order: -1; }
     .bottle { width: min(250px, 62vw); }
+    .bottle-wrap { min-height: 46vh; }
+    #bottle3d { inset: -4% -6%; width: 112%; height: 108%; }
     .demo { left: 84px; right: 12px; max-width: none; }
   }
   @media (prefers-reduced-motion: reduce) {
@@ -217,6 +223,7 @@
     </div>
     <div class="bottle-wrap" aria-hidden="true">
       <div class="halo"></div>
+      <canvas id="bottle3d" aria-label="3D флакон масляных духов"></canvas>
       <svg class="bottle" viewBox="0 0 300 420">
         <defs>
           <linearGradient id="glass" x1="0" x2="1">
@@ -332,6 +339,8 @@
 
 <div class="demo"><b>Демо-концепт</b> сайта для «Арабской парфюмерии». Подготовил Альхассан Альфарран — это пример, а не официальный сайт магазина.</div>
 
+<script type="importmap">{"imports":{"three":"./vendor/three.module.min.js"}}</script>
+<script type="module" src="./bottle3d.js"></script>
 <script>
   const WA = "79775887115";
   const waLink = (t) => "https://wa.me/" + WA + "?text=" + encodeURIComponent(t);
